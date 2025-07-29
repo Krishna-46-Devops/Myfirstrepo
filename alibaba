@@ -1,0 +1,22 @@
+    }
+ */
+function transformPayload(topic, bytes) {
+    var uint8Array = new Uint8Array(bytes.length);
+    for (var i = 0; i < bytes.length; i++) {
+        uint8Array[i] = bytes[i] & 0xff;
+    }
+    var dataView = new DataView(uint8Array.buffer, 0);
+    var jsonMap = {};
+
+    if(topic.includes(SELF_DEFINE_TOPIC_ERROR_FLAG)) {
+        jsonMap['topic'] = topic;
+        jsonMap['errorCode'] = dataView.getInt8(0)
+    } else if (topic.includes(SELF_DEFINE_TOPIC_UPDATE_FLAG)) {
+        jsonMap['topic'] = topic;
+        jsonMap['prop_int16'] = dataView.getInt16(5);
+        jsonMap['prop_bool'] = uint8Array[7];
+        jsonMap['prop_float'] = dataView.getFloat32(8);
+    }
+
+    return jsonMap;
+}
