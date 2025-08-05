@@ -1,2 +1,14 @@
-# Myfirstrepo
-my first ever repo in github
+using System; // Imports the System namespace, which contains fundamental classes and base types
+
+namespace HelloWorldApp // Declares a namespace to organize the code
+{
+    class Program // Declares a class named Program
+    {
+        static void Main(string[] args) // The entry point of the application
+        {
+            Console.WriteLine("Hello, World!"); // Prints "Hello, World!" to the console
+            Console.WriteLine("Press any key to exit."); // Prompts the user to press a key
+            Console.ReadKey(); // Waits for a key press before closing the console window
+        }
+    }
+}
